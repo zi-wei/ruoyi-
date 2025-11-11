@@ -19,6 +19,10 @@ public class EscortSpecialist extends BaseEntity
     /** 打手ID */
     private Long specialistId;
 
+    /** 用户ID */
+    @Excel(name = "用户ID")
+    private Long userId;
+
     /** 打手代号 */
     @Excel(name = "打手代号")
     private String nickname;
@@ -66,6 +70,16 @@ public class EscortSpecialist extends BaseEntity
     public Long getSpecialistId() 
     {
         return specialistId;
+    }
+
+    public void setUserId(Long userId) 
+    {
+        this.userId = userId;
+    }
+
+    public Long getUserId() 
+    {
+        return userId;
     }
 
     public void setNickname(String nickname) 
@@ -172,6 +186,7 @@ public class EscortSpecialist extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("specialistId", getSpecialistId())
+            .append("userId", getUserId())
             .append("nickname", getNickname())
             .append("avatar", getAvatar())
             .append("gameRank", getGameRank())

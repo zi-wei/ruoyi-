@@ -77,6 +77,11 @@ public class PlayReviewController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody PlayReview playReview)
     {
+        // 检查是否已经存在该订单的评论
+        PlayReview existingReview = playReviewService.selectPlayReviewByOrderId(playReview.getOrderId());
+        if (existingReview != null) {
+            return AjaxResult.error("该订单已存在评价，无法重复评价");
+        }
         return toAjax(playReviewService.insertPlayReview(playReview));
     }
 

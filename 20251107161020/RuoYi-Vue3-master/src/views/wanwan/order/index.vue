@@ -136,6 +136,12 @@
         <el-form-item label="接单陪玩ID" prop="talentId">
           <el-input v-model="form.talentId" placeholder="请输入接单陪玩ID" />
         </el-form-item>
+        <el-form-item label="计价方式" prop="pricingType">
+          <el-select v-model="form.pricingType" placeholder="请选择计价方式">
+            <el-option label="按小时" value="1"></el-option>
+            <el-option label="按局数" value="2"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="下单时单价" prop="unitPrice">
           <el-input v-model="form.unitPrice" placeholder="请输入下单时单价" />
         </el-form-item>
@@ -144,6 +150,16 @@
         </el-form-item>
         <el-form-item label="订单总金额" prop="totalAmount">
           <el-input v-model="form.totalAmount" placeholder="请输入订单总金额" />
+        </el-form-item>
+        <el-form-item label="订单状态" prop="orderStatus">
+          <el-select v-model="form.orderStatus" placeholder="请选择订单状态">
+            <el-option label="待支付" value="10"></el-option>
+            <el-option label="待服务" value="20"></el-option>
+            <el-option label="服务中" value="30"></el-option>
+            <el-option label="待确认" value="40"></el-option>
+            <el-option label="已完成" value="50"></el-option>
+            <el-option label="已取消" value="60"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="预约开始时间" prop="scheduledStartTime">
           <el-date-picker clearable

@@ -45,6 +45,11 @@
       pointer-events: none !important;
     }
 
+    /* 音乐播放器样式调整 */
+    .aplayer {
+      z-index: 10000 !important;
+    }
+
     #loader {
       display: block;
       position: relative;
@@ -220,9 +225,15 @@
       <div class="load_title">正在加载系统资源，请耐心等待</div>
     </div>
   </div>
+  <!-- 音乐播放器 -->
+  <div id="aplayer" class="aplayer" data-autoplay="true" data-id="12905472793" data-server="netease" data-type="playlist" data-fixed="true" data-listfolded="true" data-order="random" data-theme="#F58EA8"></div>
   <script type="module" src="/src/main.js"></script>
   <!-- 樱花特效 -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/wsqstar/ResHosting@0.031/build/js/Sakura.js"></script>
+  <!-- 音乐播放器 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://unpkg.com/meting@1.2.0/dist/Meting.min.js"></script>
 </body>
 
 </html>

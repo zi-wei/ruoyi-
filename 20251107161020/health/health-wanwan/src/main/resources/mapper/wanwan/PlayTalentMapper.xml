@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="PlayTalent" id="PlayTalentResult">
         <result property="talentId"    column="talent_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="nickname"    column="nickname"    />
         <result property="avatar"    column="avatar"    />
         <result property="gender"    column="gender"    />
@@ -52,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertPlayTalent" parameterType="PlayTalent" useGeneratedKeys="true" keyProperty="talentId">
         insert into play_talent
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
             <if test="nickname != null and nickname != ''">nickname,</if>
             <if test="avatar != null">avatar,</if>
             <if test="gender != null">gender,</if>
@@ -70,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
             <if test="nickname != null and nickname != ''">#{nickname},</if>
             <if test="avatar != null">#{avatar},</if>
             <if test="gender != null">#{gender},</if>

@@ -77,6 +77,13 @@ public class PlayOrderController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody PlayOrder playOrder)
     {
+        // 设置默认值
+        if (playOrder.getPricingType() == null || playOrder.getPricingType().isEmpty()) {
+            playOrder.setPricingType("1"); // 默认按小时计价
+        }
+        if (playOrder.getOrderStatus() == null || playOrder.getOrderStatus().isEmpty()) {
+            playOrder.setOrderStatus("10"); // 默认待支付状态
+        }
         return toAjax(playOrderService.insertPlayOrder(playOrder));
     }
 

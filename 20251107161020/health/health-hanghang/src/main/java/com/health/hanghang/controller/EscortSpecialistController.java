@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.health.common.annotation.Log;
 import com.health.common.core.controller.BaseController;
 import com.health.common.core.domain.AjaxResult;
+import com.health.common.core.page.TableDataInfo;
 import com.health.common.enums.BusinessType;
 import com.health.hanghang.domain.EscortSpecialist;
 import com.health.hanghang.service.IEscortSpecialistService;
+import com.health.common.utils.SecurityUtils;
 import com.health.common.utils.poi.ExcelUtil;
-import com.health.common.core.page.TableDataInfo;
 
 /**
  * 护航专区-打手Controller
@@ -77,6 +78,7 @@ public class EscortSpecialistController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody EscortSpecialist escortSpecialist)
     {
+        escortSpecialist.setUserId(SecurityUtils.getUserId());
         return toAjax(escortSpecialistService.insertEscortSpecialist(escortSpecialist));
     }
 

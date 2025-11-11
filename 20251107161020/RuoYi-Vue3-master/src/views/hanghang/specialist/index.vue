@@ -76,6 +76,7 @@
     <el-table v-loading="loading" :data="specialistList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="打手ID" align="center" prop="specialistId" />
+      <el-table-column v-if="false" label="用户ID" align="center" prop="userId" />
       <el-table-column label="打手代号" align="center" prop="nickname" />
       <el-table-column label="个人形象照片URL" align="center" prop="avatar" width="100">
         <template #default="scope">
@@ -115,6 +116,9 @@
       <el-form ref="specialistRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="打手代号" prop="nickname">
           <el-input v-model="form.nickname" placeholder="请输入打手代号" />
+        </el-form-item>
+        <el-form-item v-if="false" label="用户ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入用户ID" />
         </el-form-item>
         <el-form-item label="个人形象照片URL" prop="avatar">
           <image-upload v-model="form.avatar"/>
@@ -184,6 +188,24 @@ const data = reactive({
     ],
     status: [
       { required: true, message: "状态不能为空", trigger: "change" }
+    ],
+    depositRatio: [
+      { required: true, message: "接单所需定金比例不能为空", trigger: "blur" },
+      { 
+        pattern: /^(\d{1,8}(\.\d{1,2})?)$/,
+        message: "请输入有效的数字，最多8位整数和2位小数",
+        trigger: "blur"
+      },
+      {
+        validator: (rule, value, callback) => {
+          if (value && (parseFloat(value) < 0 || parseFloat(value) > 99999999.99)) {
+            callback(new Error('定金比例必须在0-99999999.99之间'))
+          } else {
+            callback()
+          }
+        },
+        trigger: "blur"
+      }
     ],
   }
 })

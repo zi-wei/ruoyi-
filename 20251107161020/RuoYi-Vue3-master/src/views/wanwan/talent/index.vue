@@ -92,6 +92,7 @@
     <el-table v-loading="loading" :data="talentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="人才ID" align="center" prop="talentId" />
+      <el-table-column v-if="false" label="用户ID" align="center" prop="userId" />
       <el-table-column label="陪玩昵称" align="center" prop="nickname" />
       <el-table-column label="个人形象照片URL" align="center" prop="avatar" width="100">
         <template #default="scope">
@@ -132,6 +133,9 @@
       <el-form ref="talentRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="陪玩昵称" prop="nickname">
           <el-input v-model="form.nickname" placeholder="请输入陪玩昵称" />
+        </el-form-item>
+        <el-form-item v-if="false" label="用户ID" prop="userId">
+          <el-input v-model="form.userId" placeholder="请输入用户ID" />
         </el-form-item>
         <el-form-item label="个人形象照片URL" prop="avatar">
           <image-upload v-model="form.avatar"/>
@@ -232,7 +236,6 @@ function cancel() {
 function reset() {
   form.value = {
     talentId: null,
-    userId: null,
     nickname: null,
     avatar: null,
     gender: null,

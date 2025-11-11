@@ -28,6 +28,14 @@ public interface PlayReviewMapper
     public List<PlayReview> selectPlayReviewList(PlayReview playReview);
 
     /**
+     * 根据订单ID查询评价
+     * 
+     * @param orderId 订单ID
+     * @return 陪玩专区-评价
+     */
+    public PlayReview selectPlayReviewByOrderId(Long orderId);
+
+    /**
      * 新增陪玩专区-评价
      * 
      * @param playReview 陪玩专区-评价

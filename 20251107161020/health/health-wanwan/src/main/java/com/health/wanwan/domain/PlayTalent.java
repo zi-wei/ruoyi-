@@ -19,6 +19,10 @@ public class PlayTalent extends BaseEntity
     /** 人才ID */
     private Long talentId;
 
+    /** 用户ID */
+    @Excel(name = "用户ID")
+    private Long userId;
+
     /** 陪玩昵称 */
     @Excel(name = "陪玩昵称")
     private String nickname;
@@ -70,6 +74,16 @@ public class PlayTalent extends BaseEntity
     public Long getTalentId() 
     {
         return talentId;
+    }
+
+    public void setUserId(Long userId) 
+    {
+        this.userId = userId;
+    }
+
+    public Long getUserId() 
+    {
+        return userId;
     }
 
     public void setNickname(String nickname) 
@@ -186,6 +200,7 @@ public class PlayTalent extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("talentId", getTalentId())
+            .append("userId", getUserId())
             .append("nickname", getNickname())
             .append("avatar", getAvatar())
             .append("gender", getGender())

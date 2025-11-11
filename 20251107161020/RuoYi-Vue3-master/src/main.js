@@ -88,32 +88,32 @@ const oml2d = loadOml2d({
     {
       path: '/models/Tia/index.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     },
     {
       path: '/models/Tia/index1.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     },
     {
       path: '/models/Tia/index2.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     },
     {
       path: '/models/Tia/index3.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     },
     {
       path: '/models/Tia/index4.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     },
     {
       path: '/models/Tia/index5.json',
       position: [0, 0],
-      scale: 0.2
+      scale: 0.25
     }
   ],
   menus: {

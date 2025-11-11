@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="EscortSpecialist" id="EscortSpecialistResult">
         <result property="specialistId"    column="specialist_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="nickname"    column="nickname"    />
         <result property="avatar"    column="avatar"    />
         <result property="gameRank"    column="game_rank"    />
@@ -50,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertEscortSpecialist" parameterType="EscortSpecialist" useGeneratedKeys="true" keyProperty="specialistId">
         insert into escort_specialist
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
             <if test="nickname != null and nickname != ''">nickname,</if>
             <if test="avatar != null">avatar,</if>
             <if test="gameRank != null">game_rank,</if>
@@ -67,6 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
             <if test="nickname != null and nickname != ''">#{nickname},</if>
             <if test="avatar != null">#{avatar},</if>
             <if test="gameRank != null">#{gameRank},</if>

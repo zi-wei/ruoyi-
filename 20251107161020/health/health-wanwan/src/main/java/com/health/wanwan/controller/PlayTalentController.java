@@ -20,6 +20,7 @@ import com.health.wanwan.domain.PlayTalent;
 import com.health.wanwan.service.IPlayTalentService;
 import com.health.common.utils.poi.ExcelUtil;
 import com.health.common.core.page.TableDataInfo;
+import com.health.common.utils.SecurityUtils;
 
 /**
  * 陪玩专区-人才库Controller
@@ -77,6 +78,7 @@ public class PlayTalentController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody PlayTalent playTalent)
     {
+        playTalent.setUserId(SecurityUtils.getUserId());
         return toAjax(playTalentService.insertPlayTalent(playTalent));
     }
 
