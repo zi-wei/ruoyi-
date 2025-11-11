@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.shetuan.mapper.TClubInfoMapper">
+    
+    <resultMap type="TClubInfo" id="TClubInfoResult">
+        <result property="clubId"    column="club_id"    />
+        <result property="clubName"    column="club_name"    />
+        <result property="clubType"    column="club_type"    />
+        <result property="leaderId"    column="leader_id"    />
+        <result property="description"    column="description"    />
+        <result property="foundDate"    column="found_date"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTClubInfoVo">
+        select club_id, club_name, club_type, leader_id, description, found_date, status, del_flag, create_by, create_time, update_by, update_time, remark from t_club_info
+    </sql>
+
+    <select id="selectTClubInfoList" parameterType="TClubInfo" resultMap="TClubInfoResult">
+        <include refid="selectTClubInfoVo"/>
+        <where>  
+            <if test="clubName != null  and clubName != ''"> and club_name like concat('%', #{clubName}, '%')</if>
+            <if test="clubType != null  and clubType != ''"> and club_type = #{clubType}</if>
+            <if test="leaderId != null "> and leader_id = #{leaderId}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="foundDate != null "> and found_date = #{foundDate}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectTClubInfoByClubId" parameterType="Long" resultMap="TClubInfoResult">
+        <include refid="selectTClubInfoVo"/>
+        where club_id = #{clubId}
+    </select>
+
+    <insert id="insertTClubInfo" parameterType="TClubInfo" useGeneratedKeys="true" keyProperty="clubId">
+        insert into t_club_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clubName != null and clubName != ''">club_name,</if>
+            <if test="clubType != null and clubType != ''">club_type,</if>
+            <if test="leaderId != null">leader_id,</if>
+            <if test="description != null">description,</if>
+            <if test="foundDate != null">found_date,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clubName != null and clubName != ''">#{clubName},</if>
+            <if test="clubType != null and clubType != ''">#{clubType},</if>
+            <if test="leaderId != null">#{leaderId},</if>
+            <if test="description != null">#{description},</if>
+            <if test="foundDate != null">#{foundDate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTClubInfo" parameterType="TClubInfo">
+        update t_club_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clubName != null and clubName != ''">club_name = #{clubName},</if>
+            <if test="clubType != null and clubType != ''">club_type = #{clubType},</if>
+            <if test="leaderId != null">leader_id = #{leaderId},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="foundDate != null">found_date = #{foundDate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where club_id = #{clubId}
+    </update>
+
+    <delete id="deleteTClubInfoByClubId" parameterType="Long">
+        delete from t_club_info where club_id = #{clubId}
+    </delete>
+
+    <delete id="deleteTClubInfoByClubIds" parameterType="String">
+        delete from t_club_info where club_id in 
+        <foreach item="clubId" collection="array" open="(" separator="," close=")">
+            #{clubId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.hanghang.mapper.EscortVoucherMapper">
+    
+    <resultMap type="EscortVoucher" id="EscortVoucherResult">
+        <result property="voucherId"    column="voucher_id"    />
+        <result property="missionId"    column="mission_id"    />
+        <result property="uploaderId"    column="uploader_id"    />
+        <result property="voucherType"    column="voucher_type"    />
+        <result property="voucherUrl"    column="voucher_url"    />
+        <result property="description"    column="description"    />
+        <result property="finalAssetValue"    column="final_asset_value"    />
+        <result property="isConfirmedByCustomer"    column="is_confirmed_by_customer"    />
+        <result property="adminAuditStatus"    column="admin_audit_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectEscortVoucherVo">
+        select voucher_id, mission_id, uploader_id, voucher_type, voucher_url, description, final_asset_value, is_confirmed_by_customer, admin_audit_status, del_flag, create_by, create_time, update_by, update_time, remark from escort_voucher
+    </sql>
+
+    <select id="selectEscortVoucherList" parameterType="EscortVoucher" resultMap="EscortVoucherResult">
+        <include refid="selectEscortVoucherVo"/>
+        <where>  
+            <if test="missionId != null "> and mission_id = #{missionId}</if>
+            <if test="uploaderId != null "> and uploader_id = #{uploaderId}</if>
+            <if test="voucherType != null  and voucherType != ''"> and voucher_type = #{voucherType}</if>
+            <if test="voucherUrl != null  and voucherUrl != ''"> and voucher_url = #{voucherUrl}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="finalAssetValue != null "> and final_asset_value = #{finalAssetValue}</if>
+            <if test="isConfirmedByCustomer != null  and isConfirmedByCustomer != ''"> and is_confirmed_by_customer = #{isConfirmedByCustomer}</if>
+            <if test="adminAuditStatus != null  and adminAuditStatus != ''"> and admin_audit_status = #{adminAuditStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectEscortVoucherByVoucherId" parameterType="Long" resultMap="EscortVoucherResult">
+        <include refid="selectEscortVoucherVo"/>
+        where voucher_id = #{voucherId}
+    </select>
+
+    <insert id="insertEscortVoucher" parameterType="EscortVoucher" useGeneratedKeys="true" keyProperty="voucherId">
+        insert into escort_voucher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="missionId != null">mission_id,</if>
+            <if test="uploaderId != null">uploader_id,</if>
+            <if test="voucherType != null and voucherType != ''">voucher_type,</if>
+            <if test="voucherUrl != null and voucherUrl != ''">voucher_url,</if>
+            <if test="description != null">description,</if>
+            <if test="finalAssetValue != null">final_asset_value,</if>
+            <if test="isConfirmedByCustomer != null">is_confirmed_by_customer,</if>
+            <if test="adminAuditStatus != null">admin_audit_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="missionId != null">#{missionId},</if>
+            <if test="uploaderId != null">#{uploaderId},</if>
+            <if test="voucherType != null and voucherType != ''">#{voucherType},</if>
+            <if test="voucherUrl != null and voucherUrl != ''">#{voucherUrl},</if>
+            <if test="description != null">#{description},</if>
+            <if test="finalAssetValue != null">#{finalAssetValue},</if>
+            <if test="isConfirmedByCustomer != null">#{isConfirmedByCustomer},</if>
+            <if test="adminAuditStatus != null">#{adminAuditStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEscortVoucher" parameterType="EscortVoucher">
+        update escort_voucher
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="missionId != null">mission_id = #{missionId},</if>
+            <if test="uploaderId != null">uploader_id = #{uploaderId},</if>
+            <if test="voucherType != null and voucherType != ''">voucher_type = #{voucherType},</if>
+            <if test="voucherUrl != null and voucherUrl != ''">voucher_url = #{voucherUrl},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="finalAssetValue != null">final_asset_value = #{finalAssetValue},</if>
+            <if test="isConfirmedByCustomer != null">is_confirmed_by_customer = #{isConfirmedByCustomer},</if>
+            <if test="adminAuditStatus != null">admin_audit_status = #{adminAuditStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where voucher_id = #{voucherId}
+    </update>
+
+    <delete id="deleteEscortVoucherByVoucherId" parameterType="Long">
+        delete from escort_voucher where voucher_id = #{voucherId}
+    </delete>
+
+    <delete id="deleteEscortVoucherByVoucherIds" parameterType="String">
+        delete from escort_voucher where voucher_id in 
+        <foreach item="voucherId" collection="array" open="(" separator="," close=")">
+            #{voucherId}
+        </foreach>
+    </delete>
+</mapper>

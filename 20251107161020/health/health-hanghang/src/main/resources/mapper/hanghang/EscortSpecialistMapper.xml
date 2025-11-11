@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.hanghang.mapper.EscortSpecialistMapper">
+    
+    <resultMap type="EscortSpecialist" id="EscortSpecialistResult">
+        <result property="specialistId"    column="specialist_id"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="gameRank"    column="game_rank"    />
+        <result property="successRate"    column="success_rate"    />
+        <result property="avgAssetValue"    column="avg_asset_value"    />
+        <result property="specialties"    column="specialties"    />
+        <result property="profileBio"    column="profile_bio"    />
+        <result property="depositRatio"    column="deposit_ratio"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectEscortSpecialistVo">
+        select specialist_id, nickname, avatar, game_rank, success_rate, avg_asset_value, specialties, profile_bio, deposit_ratio, status, del_flag, create_by, create_time, update_by, update_time, remark from escort_specialist
+    </sql>
+
+    <select id="selectEscortSpecialistList" parameterType="EscortSpecialist" resultMap="EscortSpecialistResult">
+        <include refid="selectEscortSpecialistVo"/>
+        <where>  
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+            <if test="gameRank != null  and gameRank != ''"> and game_rank = #{gameRank}</if>
+            <if test="successRate != null "> and success_rate = #{successRate}</if>
+            <if test="avgAssetValue != null "> and avg_asset_value = #{avgAssetValue}</if>
+            <if test="specialties != null  and specialties != ''"> and specialties = #{specialties}</if>
+            <if test="profileBio != null  and profileBio != ''"> and profile_bio = #{profileBio}</if>
+            <if test="depositRatio != null "> and deposit_ratio = #{depositRatio}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectEscortSpecialistBySpecialistId" parameterType="Long" resultMap="EscortSpecialistResult">
+        <include refid="selectEscortSpecialistVo"/>
+        where specialist_id = #{specialistId}
+    </select>
+
+    <insert id="insertEscortSpecialist" parameterType="EscortSpecialist" useGeneratedKeys="true" keyProperty="specialistId">
+        insert into escort_specialist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="gameRank != null">game_rank,</if>
+            <if test="successRate != null">success_rate,</if>
+            <if test="avgAssetValue != null">avg_asset_value,</if>
+            <if test="specialties != null">specialties,</if>
+            <if test="profileBio != null">profile_bio,</if>
+            <if test="depositRatio != null">deposit_ratio,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="gameRank != null">#{gameRank},</if>
+            <if test="successRate != null">#{successRate},</if>
+            <if test="avgAssetValue != null">#{avgAssetValue},</if>
+            <if test="specialties != null">#{specialties},</if>
+            <if test="profileBio != null">#{profileBio},</if>
+            <if test="depositRatio != null">#{depositRatio},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEscortSpecialist" parameterType="EscortSpecialist">
+        update escort_specialist
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="gameRank != null">game_rank = #{gameRank},</if>
+            <if test="successRate != null">success_rate = #{successRate},</if>
+            <if test="avgAssetValue != null">avg_asset_value = #{avgAssetValue},</if>
+            <if test="specialties != null">specialties = #{specialties},</if>
+            <if test="profileBio != null">profile_bio = #{profileBio},</if>
+            <if test="depositRatio != null">deposit_ratio = #{depositRatio},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where specialist_id = #{specialistId}
+    </update>
+
+    <delete id="deleteEscortSpecialistBySpecialistId" parameterType="Long">
+        delete from escort_specialist where specialist_id = #{specialistId}
+    </delete>
+
+    <delete id="deleteEscortSpecialistBySpecialistIds" parameterType="String">
+        delete from escort_specialist where specialist_id in 
+        <foreach item="specialistId" collection="array" open="(" separator="," close=")">
+            #{specialistId}
+        </foreach>
+    </delete>
+</mapper>

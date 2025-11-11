@@ -1,0 +1,24 @@
+{
+  "name": "vite-plugin-oh-my-live2d",
+  "version": "0.19.3",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json"
+  },
+  "dependencies": {
+    "javascript-stringify": "^2.1.0",
+    "oh-my-live2d": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.2.11"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

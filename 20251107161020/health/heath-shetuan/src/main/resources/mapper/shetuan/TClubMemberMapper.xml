@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.shetuan.mapper.TClubMemberMapper">
+    
+    <resultMap type="TClubMember" id="TClubMemberResult">
+        <result property="memberId"    column="member_id"    />
+        <result property="clubId"    column="club_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="joinDate"    column="join_date"    />
+        <result property="roleInClub"    column="role_in_club"    />
+        <result property="applyStatus"    column="apply_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTClubMemberVo">
+        select member_id, club_id, user_id, join_date, role_in_club, apply_status, del_flag, create_by, create_time, update_by, update_time, remark from t_club_member
+    </sql>
+
+    <select id="selectTClubMemberList" parameterType="TClubMember" resultMap="TClubMemberResult">
+        <include refid="selectTClubMemberVo"/>
+        <where>  
+            <if test="clubId != null "> and club_id = #{clubId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="joinDate != null "> and join_date = #{joinDate}</if>
+            <if test="roleInClub != null  and roleInClub != ''"> and role_in_club = #{roleInClub}</if>
+            <if test="applyStatus != null  and applyStatus != ''"> and apply_status = #{applyStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectTClubMemberByMemberId" parameterType="Long" resultMap="TClubMemberResult">
+        <include refid="selectTClubMemberVo"/>
+        where member_id = #{memberId}
+    </select>
+
+    <insert id="insertTClubMember" parameterType="TClubMember" useGeneratedKeys="true" keyProperty="memberId">
+        insert into t_club_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clubId != null">club_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="joinDate != null">join_date,</if>
+            <if test="roleInClub != null">role_in_club,</if>
+            <if test="applyStatus != null">apply_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clubId != null">#{clubId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="joinDate != null">#{joinDate},</if>
+            <if test="roleInClub != null">#{roleInClub},</if>
+            <if test="applyStatus != null">#{applyStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTClubMember" parameterType="TClubMember">
+        update t_club_member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clubId != null">club_id = #{clubId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="joinDate != null">join_date = #{joinDate},</if>
+            <if test="roleInClub != null">role_in_club = #{roleInClub},</if>
+            <if test="applyStatus != null">apply_status = #{applyStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where member_id = #{memberId}
+    </update>
+
+    <delete id="deleteTClubMemberByMemberId" parameterType="Long">
+        delete from t_club_member where member_id = #{memberId}
+    </delete>
+
+    <delete id="deleteTClubMemberByMemberIds" parameterType="String">
+        delete from t_club_member where member_id in 
+        <foreach item="memberId" collection="array" open="(" separator="," close=")">
+            #{memberId}
+        </foreach>
+    </delete>
+</mapper>

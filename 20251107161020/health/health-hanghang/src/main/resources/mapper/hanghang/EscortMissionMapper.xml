@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.hanghang.mapper.EscortMissionMapper">
+    
+    <resultMap type="EscortMission" id="EscortMissionResult">
+        <result property="missionId"    column="mission_id"    />
+        <result property="missionSn"    column="mission_sn"    />
+        <result property="publisherId"    column="publisher_id"    />
+        <result property="specialistId"    column="specialist_id"    />
+        <result property="missionStatus"    column="mission_status"    />
+        <result property="gameMap"    column="game_map"    />
+        <result property="objective"    column="objective"    />
+        <result property="guaranteedAssetValue"    column="guaranteed_asset_value"    />
+        <result property="rewardAmount"    column="reward_amount"    />
+        <result property="depositAmount"    column="deposit_amount"    />
+        <result property="deadline"    column="deadline"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectEscortMissionVo">
+        select mission_id, mission_sn, publisher_id, specialist_id, mission_status, game_map, objective, guaranteed_asset_value, reward_amount, deposit_amount, deadline, del_flag, create_by, create_time, update_by, update_time, remark from escort_mission
+    </sql>
+
+    <select id="selectEscortMissionList" parameterType="EscortMission" resultMap="EscortMissionResult">
+        <include refid="selectEscortMissionVo"/>
+        <where>  
+            <if test="missionSn != null  and missionSn != ''"> and mission_sn = #{missionSn}</if>
+            <if test="publisherId != null "> and publisher_id = #{publisherId}</if>
+            <if test="specialistId != null "> and specialist_id = #{specialistId}</if>
+            <if test="missionStatus != null  and missionStatus != ''"> and mission_status = #{missionStatus}</if>
+            <if test="gameMap != null  and gameMap != ''"> and game_map = #{gameMap}</if>
+            <if test="objective != null  and objective != ''"> and objective = #{objective}</if>
+            <if test="guaranteedAssetValue != null "> and guaranteed_asset_value = #{guaranteedAssetValue}</if>
+            <if test="rewardAmount != null "> and reward_amount = #{rewardAmount}</if>
+            <if test="depositAmount != null "> and deposit_amount = #{depositAmount}</if>
+            <if test="deadline != null "> and deadline = #{deadline}</if>
+        </where>
+    </select>
+    
+    <select id="selectEscortMissionByMissionId" parameterType="Long" resultMap="EscortMissionResult">
+        <include refid="selectEscortMissionVo"/>
+        where mission_id = #{missionId}
+    </select>
+
+    <insert id="insertEscortMission" parameterType="EscortMission" useGeneratedKeys="true" keyProperty="missionId">
+        insert into escort_mission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="missionSn != null and missionSn != ''">mission_sn,</if>
+            <if test="publisherId != null">publisher_id,</if>
+            <if test="specialistId != null">specialist_id,</if>
+            <if test="missionStatus != null and missionStatus != ''">mission_status,</if>
+            <if test="gameMap != null and gameMap != ''">game_map,</if>
+            <if test="objective != null and objective != ''">objective,</if>
+            <if test="guaranteedAssetValue != null">guaranteed_asset_value,</if>
+            <if test="rewardAmount != null">reward_amount,</if>
+            <if test="depositAmount != null">deposit_amount,</if>
+            <if test="deadline != null">deadline,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="missionSn != null and missionSn != ''">#{missionSn},</if>
+            <if test="publisherId != null">#{publisherId},</if>
+            <if test="specialistId != null">#{specialistId},</if>
+            <if test="missionStatus != null and missionStatus != ''">#{missionStatus},</if>
+            <if test="gameMap != null and gameMap != ''">#{gameMap},</if>
+            <if test="objective != null and objective != ''">#{objective},</if>
+            <if test="guaranteedAssetValue != null">#{guaranteedAssetValue},</if>
+            <if test="rewardAmount != null">#{rewardAmount},</if>
+            <if test="depositAmount != null">#{depositAmount},</if>
+            <if test="deadline != null">#{deadline},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEscortMission" parameterType="EscortMission">
+        update escort_mission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="missionSn != null and missionSn != ''">mission_sn = #{missionSn},</if>
+            <if test="publisherId != null">publisher_id = #{publisherId},</if>
+            <if test="specialistId != null">specialist_id = #{specialistId},</if>
+            <if test="missionStatus != null and missionStatus != ''">mission_status = #{missionStatus},</if>
+            <if test="gameMap != null and gameMap != ''">game_map = #{gameMap},</if>
+            <if test="objective != null and objective != ''">objective = #{objective},</if>
+            <if test="guaranteedAssetValue != null">guaranteed_asset_value = #{guaranteedAssetValue},</if>
+            <if test="rewardAmount != null">reward_amount = #{rewardAmount},</if>
+            <if test="depositAmount != null">deposit_amount = #{depositAmount},</if>
+            <if test="deadline != null">deadline = #{deadline},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where mission_id = #{missionId}
+    </update>
+
+    <delete id="deleteEscortMissionByMissionId" parameterType="Long">
+        delete from escort_mission where mission_id = #{missionId}
+    </delete>
+
+    <delete id="deleteEscortMissionByMissionIds" parameterType="String">
+        delete from escort_mission where mission_id in 
+        <foreach item="missionId" collection="array" open="(" separator="," close=")">
+            #{missionId}
+        </foreach>
+    </delete>
+</mapper>

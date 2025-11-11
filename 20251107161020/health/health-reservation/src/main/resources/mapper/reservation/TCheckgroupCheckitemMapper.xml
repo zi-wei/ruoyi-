@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.reservation.mapper.TCheckgroupCheckitemMapper">
+    
+    <resultMap type="TCheckgroupCheckitem" id="TCheckgroupCheckitemResult">
+        <result property="checkgroupId"    column="checkgroup_id"    />
+        <result property="checkitemId"    column="checkitem_id"    />
+    </resultMap>
+
+    <sql id="selectTCheckgroupCheckitemVo">
+        select checkgroup_id, checkitem_id from t_checkgroup_checkitem
+    </sql>
+
+    <select id="selectTCheckgroupCheckitemList" parameterType="TCheckgroupCheckitem" resultMap="TCheckgroupCheckitemResult">
+        <include refid="selectTCheckgroupCheckitemVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectTCheckgroupCheckitemByCheckgroupId" parameterType="Long" resultMap="TCheckgroupCheckitemResult">
+        <include refid="selectTCheckgroupCheckitemVo"/>
+        where checkgroup_id = #{checkgroupId}
+    </select>
+
+    <insert id="insertTCheckgroupCheckitem" parameterType="TCheckgroupCheckitem">
+        insert into t_checkgroup_checkitem
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="checkgroupId != null">checkgroup_id,</if>
+            <if test="checkitemId != null">checkitem_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="checkgroupId != null">#{checkgroupId},</if>
+            <if test="checkitemId != null">#{checkitemId},</if>
+         </trim>
+    </insert>
+
+    <insert id="insertCheckitemIds">
+        insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{groupId},#{item})
+        </foreach>
+    </insert>
+
+    <update id="updateTCheckgroupCheckitem" parameterType="TCheckgroupCheckitem">
+        update t_checkgroup_checkitem
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="checkitemId != null">checkitem_id = #{checkitemId},</if>
+        </trim>
+        where checkgroup_id = #{checkgroupId}
+    </update>
+
+    <delete id="deleteTCheckgroupCheckitemByCheckgroupId" parameterType="Long">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
+    </delete>
+
+    <delete id="deleteTCheckgroupCheckitemByCheckgroupIds" parameterType="String">
+        delete from t_checkgroup_checkitem where checkgroup_id in 
+        <foreach item="checkgroupId" collection="array" open="(" separator="," close=")">
+            #{checkgroupId}
+        </foreach>
+    </delete>
+</mapper>

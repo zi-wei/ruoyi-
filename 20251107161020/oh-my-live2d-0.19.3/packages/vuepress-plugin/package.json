@@ -1,0 +1,45 @@
+{
+  "name": "vuepress-plugin-oh-my-live2d",
+  "version": "0.19.3",
+  "description": "VuePress2 的 live2d 看板组件插件",
+  "keywords": [
+    "vuepress2",
+    "vuepress2-plugin",
+    "live2d",
+    "cubism2",
+    "cubism4"
+  ],
+  "homepage": "https://oml2d.com/guide/vuepress",
+  "bugs": "https://github.com/oh-my-live2d/oh-my-live2d/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oh-my-live2d/oh-my-live2d.git",
+    "directory": "packages/vuepress-plugin"
+  },
+  "license": "MIT",
+  "author": "loclink",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/node/index.d.ts",
+      "import": "./dist/node/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/node/index.js",
+  "types": "./dist/node/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "release": "dotenv release-it"
+  },
+  "dependencies": {
+    "oh-my-live2d": "workspace:*",
+    "vue": "^3.4.21"
+  },
+  "peerDependencies": {
+    "vuepress": "^2.0.0-rc.8"
+  }
+}

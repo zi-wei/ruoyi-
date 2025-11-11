@@ -1,0 +1,28 @@
+**/build/**
+dist/
+dist-ssr/
+node_modules/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.env
+*.local
+.cache
+**/.vitepress/cache/
+.temp
+
+# Logs
+logs
+*.log
+pnpm-debug.log*
+lerna-debug.log*
+tests/vite-app/public/models/

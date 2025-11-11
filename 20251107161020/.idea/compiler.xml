@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="health-common" />
+        <module name="health-hanghang" />
+        <module name="health-system" />
+        <module name="heath-shetuan" />
+        <module name="health-wanwan" />
+        <module name="health-admin" />
+        <module name="health-quartz" />
+        <module name="health-framework" />
+        <module name="health-generator" />
+        <module name="health-reservation" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hanghang" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hanghang" options="-parameters" />
+      <module name="health" options="-parameters" />
+      <module name="health-admin" options="-parameters" />
+      <module name="health-common" options="-parameters" />
+      <module name="health-framework" options="-parameters" />
+      <module name="health-generator" options="-parameters" />
+      <module name="health-hanghang" options="-parameters" />
+      <module name="health-quartz" options="-parameters" />
+      <module name="health-reservation" options="-parameters" />
+      <module name="health-system" options="-parameters" />
+      <module name="health-wanwan" options="-parameters" />
+      <module name="heath-shetuan" options="-parameters" />
+    </option>
+  </component>
+</project>

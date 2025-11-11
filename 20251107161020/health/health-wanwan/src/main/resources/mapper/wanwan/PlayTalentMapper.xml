@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.wanwan.mapper.PlayTalentMapper">
+    
+    <resultMap type="PlayTalent" id="PlayTalentResult">
+        <result property="talentId"    column="talent_id"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="gender"    column="gender"    />
+        <result property="voiceSampleUrl"    column="voice_sample_url"    />
+        <result property="profileTags"    column="profile_tags"    />
+        <result property="hourlyRate"    column="hourly_rate"    />
+        <result property="perGameRate"    column="per_game_rate"    />
+        <result property="averageRating"    column="average_rating"    />
+        <result property="totalOrdersCompleted"    column="total_orders_completed"    />
+        <result property="onlineStatus"    column="online_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPlayTalentVo">
+        select talent_id, nickname, avatar, gender, voice_sample_url, profile_tags, hourly_rate, per_game_rate, average_rating, total_orders_completed, online_status, del_flag, create_by, create_time, update_by, update_time, remark from play_talent
+    </sql>
+
+    <select id="selectPlayTalentList" parameterType="PlayTalent" resultMap="PlayTalentResult">
+        <include refid="selectPlayTalentVo"/>
+        <where>  
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="voiceSampleUrl != null  and voiceSampleUrl != ''"> and voice_sample_url = #{voiceSampleUrl}</if>
+            <if test="profileTags != null  and profileTags != ''"> and profile_tags = #{profileTags}</if>
+            <if test="hourlyRate != null "> and hourly_rate = #{hourlyRate}</if>
+            <if test="perGameRate != null "> and per_game_rate = #{perGameRate}</if>
+            <if test="averageRating != null "> and average_rating = #{averageRating}</if>
+            <if test="totalOrdersCompleted != null "> and total_orders_completed = #{totalOrdersCompleted}</if>
+            <if test="onlineStatus != null  and onlineStatus != ''"> and online_status = #{onlineStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlayTalentByTalentId" parameterType="Long" resultMap="PlayTalentResult">
+        <include refid="selectPlayTalentVo"/>
+        where talent_id = #{talentId}
+    </select>
+
+    <insert id="insertPlayTalent" parameterType="PlayTalent" useGeneratedKeys="true" keyProperty="talentId">
+        insert into play_talent
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="gender != null">gender,</if>
+            <if test="voiceSampleUrl != null">voice_sample_url,</if>
+            <if test="profileTags != null">profile_tags,</if>
+            <if test="hourlyRate != null">hourly_rate,</if>
+            <if test="perGameRate != null">per_game_rate,</if>
+            <if test="averageRating != null">average_rating,</if>
+            <if test="totalOrdersCompleted != null">total_orders_completed,</if>
+            <if test="onlineStatus != null and onlineStatus != ''">online_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="voiceSampleUrl != null">#{voiceSampleUrl},</if>
+            <if test="profileTags != null">#{profileTags},</if>
+            <if test="hourlyRate != null">#{hourlyRate},</if>
+            <if test="perGameRate != null">#{perGameRate},</if>
+            <if test="averageRating != null">#{averageRating},</if>
+            <if test="totalOrdersCompleted != null">#{totalOrdersCompleted},</if>
+            <if test="onlineStatus != null and onlineStatus != ''">#{onlineStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayTalent" parameterType="PlayTalent">
+        update play_talent
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="voiceSampleUrl != null">voice_sample_url = #{voiceSampleUrl},</if>
+            <if test="profileTags != null">profile_tags = #{profileTags},</if>
+            <if test="hourlyRate != null">hourly_rate = #{hourlyRate},</if>
+            <if test="perGameRate != null">per_game_rate = #{perGameRate},</if>
+            <if test="averageRating != null">average_rating = #{averageRating},</if>
+            <if test="totalOrdersCompleted != null">total_orders_completed = #{totalOrdersCompleted},</if>
+            <if test="onlineStatus != null and onlineStatus != ''">online_status = #{onlineStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where talent_id = #{talentId}
+    </update>
+
+    <delete id="deletePlayTalentByTalentId" parameterType="Long">
+        delete from play_talent where talent_id = #{talentId}
+    </delete>
+
+    <delete id="deletePlayTalentByTalentIds" parameterType="String">
+        delete from play_talent where talent_id in 
+        <foreach item="talentId" collection="array" open="(" separator="," close=")">
+            #{talentId}
+        </foreach>
+    </delete>
+</mapper>

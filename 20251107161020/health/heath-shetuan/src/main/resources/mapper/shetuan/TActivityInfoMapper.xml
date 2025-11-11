@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.shetuan.mapper.TActivityInfoMapper">
+    
+    <resultMap type="TActivityInfo" id="TActivityInfoResult">
+        <result property="activityId"    column="activity_id"    />
+        <result property="clubId"    column="club_id"    />
+        <result property="activityName"    column="activity_name"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="location"    column="location"    />
+        <result property="status"    column="status"    />
+        <result property="approvalUserId"    column="approval_user_id"    />
+        <result property="maxParticipants"    column="max_participants"    />
+        <result property="actualParticipants"    column="actual_participants"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTActivityInfoVo">
+        select activity_id, club_id, activity_name, start_time, end_time, location, status, approval_user_id, max_participants, actual_participants, del_flag, create_by, create_time, update_by, update_time, remark from t_activity_info
+    </sql>
+
+    <select id="selectTActivityInfoList" parameterType="TActivityInfo" resultMap="TActivityInfoResult">
+        <include refid="selectTActivityInfoVo"/>
+        <where>  
+            <if test="clubId != null "> and club_id = #{clubId}</if>
+            <if test="activityName != null  and activityName != ''"> and activity_name like concat('%', #{activityName}, '%')</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="approvalUserId != null "> and approval_user_id = #{approvalUserId}</if>
+            <if test="maxParticipants != null "> and max_participants = #{maxParticipants}</if>
+            <if test="actualParticipants != null "> and actual_participants = #{actualParticipants}</if>
+        </where>
+    </select>
+    
+    <select id="selectTActivityInfoByActivityId" parameterType="Long" resultMap="TActivityInfoResult">
+        <include refid="selectTActivityInfoVo"/>
+        where activity_id = #{activityId}
+    </select>
+
+    <insert id="insertTActivityInfo" parameterType="TActivityInfo" useGeneratedKeys="true" keyProperty="activityId">
+        insert into t_activity_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clubId != null">club_id,</if>
+            <if test="activityName != null and activityName != ''">activity_name,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="location != null">location,</if>
+            <if test="status != null">status,</if>
+            <if test="approvalUserId != null">approval_user_id,</if>
+            <if test="maxParticipants != null">max_participants,</if>
+            <if test="actualParticipants != null">actual_participants,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clubId != null">#{clubId},</if>
+            <if test="activityName != null and activityName != ''">#{activityName},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="location != null">#{location},</if>
+            <if test="status != null">#{status},</if>
+            <if test="approvalUserId != null">#{approvalUserId},</if>
+            <if test="maxParticipants != null">#{maxParticipants},</if>
+            <if test="actualParticipants != null">#{actualParticipants},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTActivityInfo" parameterType="TActivityInfo">
+        update t_activity_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clubId != null">club_id = #{clubId},</if>
+            <if test="activityName != null and activityName != ''">activity_name = #{activityName},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="approvalUserId != null">approval_user_id = #{approvalUserId},</if>
+            <if test="maxParticipants != null">max_participants = #{maxParticipants},</if>
+            <if test="actualParticipants != null">actual_participants = #{actualParticipants},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where activity_id = #{activityId}
+    </update>
+
+    <delete id="deleteTActivityInfoByActivityId" parameterType="Long">
+        delete from t_activity_info where activity_id = #{activityId}
+    </delete>
+
+    <delete id="deleteTActivityInfoByActivityIds" parameterType="String">
+        delete from t_activity_info where activity_id in 
+        <foreach item="activityId" collection="array" open="(" separator="," close=")">
+            #{activityId}
+        </foreach>
+    </delete>
+</mapper>

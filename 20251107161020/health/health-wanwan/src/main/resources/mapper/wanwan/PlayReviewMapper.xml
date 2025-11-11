@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.wanwan.mapper.PlayReviewMapper">
+    
+    <resultMap type="PlayReview" id="PlayReviewResult">
+        <result property="reviewId"    column="review_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="talentId"    column="talent_id"    />
+        <result property="customerId"    column="customer_id"    />
+        <result property="ratingScore"    column="rating_score"    />
+        <result property="reviewTags"    column="review_tags"    />
+        <result property="comment"    column="comment"    />
+        <result property="hasReply"    column="has_reply"    />
+        <result property="replyContent"    column="reply_content"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPlayReviewVo">
+        select review_id, order_id, talent_id, customer_id, rating_score, review_tags, comment, has_reply, reply_content, del_flag, create_by, create_time, update_by, update_time from play_review
+    </sql>
+
+    <select id="selectPlayReviewList" parameterType="PlayReview" resultMap="PlayReviewResult">
+        <include refid="selectPlayReviewVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="talentId != null "> and talent_id = #{talentId}</if>
+            <if test="customerId != null "> and customer_id = #{customerId}</if>
+            <if test="ratingScore != null "> and rating_score = #{ratingScore}</if>
+            <if test="reviewTags != null  and reviewTags != ''"> and review_tags = #{reviewTags}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="hasReply != null  and hasReply != ''"> and has_reply = #{hasReply}</if>
+            <if test="replyContent != null  and replyContent != ''"> and reply_content = #{replyContent}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlayReviewByReviewId" parameterType="Long" resultMap="PlayReviewResult">
+        <include refid="selectPlayReviewVo"/>
+        where review_id = #{reviewId}
+    </select>
+
+    <insert id="insertPlayReview" parameterType="PlayReview" useGeneratedKeys="true" keyProperty="reviewId">
+        insert into play_review
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="talentId != null">talent_id,</if>
+            <if test="customerId != null">customer_id,</if>
+            <if test="ratingScore != null">rating_score,</if>
+            <if test="reviewTags != null">review_tags,</if>
+            <if test="comment != null">comment,</if>
+            <if test="hasReply != null">has_reply,</if>
+            <if test="replyContent != null">reply_content,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="talentId != null">#{talentId},</if>
+            <if test="customerId != null">#{customerId},</if>
+            <if test="ratingScore != null">#{ratingScore},</if>
+            <if test="reviewTags != null">#{reviewTags},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="hasReply != null">#{hasReply},</if>
+            <if test="replyContent != null">#{replyContent},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayReview" parameterType="PlayReview">
+        update play_review
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="talentId != null">talent_id = #{talentId},</if>
+            <if test="customerId != null">customer_id = #{customerId},</if>
+            <if test="ratingScore != null">rating_score = #{ratingScore},</if>
+            <if test="reviewTags != null">review_tags = #{reviewTags},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="hasReply != null">has_reply = #{hasReply},</if>
+            <if test="replyContent != null">reply_content = #{replyContent},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where review_id = #{reviewId}
+    </update>
+
+    <delete id="deletePlayReviewByReviewId" parameterType="Long">
+        delete from play_review where review_id = #{reviewId}
+    </delete>
+
+    <delete id="deletePlayReviewByReviewIds" parameterType="String">
+        delete from play_review where review_id in 
+        <foreach item="reviewId" collection="array" open="(" separator="," close=")">
+            #{reviewId}
+        </foreach>
+    </delete>
+</mapper>

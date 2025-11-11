@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.wanwan.mapper.PlayOrderMapper">
+    
+    <resultMap type="PlayOrder" id="PlayOrderResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="orderSn"    column="order_sn"    />
+        <result property="customerId"    column="customer_id"    />
+        <result property="talentId"    column="talent_id"    />
+        <result property="pricingType"    column="pricing_type"    />
+        <result property="unitPrice"    column="unit_price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="totalAmount"    column="total_amount"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="scheduledStartTime"    column="scheduled_start_time"    />
+        <result property="actualStartTime"    column="actual_start_time"    />
+        <result property="actualEndTime"    column="actual_end_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPlayOrderVo">
+        select order_id, order_sn, customer_id, talent_id, pricing_type, unit_price, quantity, total_amount, order_status, scheduled_start_time, actual_start_time, actual_end_time, del_flag, create_by, create_time, update_by, update_time, remark from play_order
+    </sql>
+
+    <select id="selectPlayOrderList" parameterType="PlayOrder" resultMap="PlayOrderResult">
+        <include refid="selectPlayOrderVo"/>
+        <where>  
+            <if test="orderSn != null  and orderSn != ''"> and order_sn = #{orderSn}</if>
+            <if test="customerId != null "> and customer_id = #{customerId}</if>
+            <if test="talentId != null "> and talent_id = #{talentId}</if>
+            <if test="pricingType != null  and pricingType != ''"> and pricing_type = #{pricingType}</if>
+            <if test="unitPrice != null "> and unit_price = #{unitPrice}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="totalAmount != null "> and total_amount = #{totalAmount}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="scheduledStartTime != null "> and scheduled_start_time = #{scheduledStartTime}</if>
+            <if test="actualStartTime != null "> and actual_start_time = #{actualStartTime}</if>
+            <if test="actualEndTime != null "> and actual_end_time = #{actualEndTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlayOrderByOrderId" parameterType="Long" resultMap="PlayOrderResult">
+        <include refid="selectPlayOrderVo"/>
+        where order_id = #{orderId}
+    </select>
+
+    <insert id="insertPlayOrder" parameterType="PlayOrder" useGeneratedKeys="true" keyProperty="orderId">
+        insert into play_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderSn != null and orderSn != ''">order_sn,</if>
+            <if test="customerId != null">customer_id,</if>
+            <if test="talentId != null">talent_id,</if>
+            <if test="pricingType != null and pricingType != ''">pricing_type,</if>
+            <if test="unitPrice != null">unit_price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="orderStatus != null and orderStatus != ''">order_status,</if>
+            <if test="scheduledStartTime != null">scheduled_start_time,</if>
+            <if test="actualStartTime != null">actual_start_time,</if>
+            <if test="actualEndTime != null">actual_end_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderSn != null and orderSn != ''">#{orderSn},</if>
+            <if test="customerId != null">#{customerId},</if>
+            <if test="talentId != null">#{talentId},</if>
+            <if test="pricingType != null and pricingType != ''">#{pricingType},</if>
+            <if test="unitPrice != null">#{unitPrice},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="orderStatus != null and orderStatus != ''">#{orderStatus},</if>
+            <if test="scheduledStartTime != null">#{scheduledStartTime},</if>
+            <if test="actualStartTime != null">#{actualStartTime},</if>
+            <if test="actualEndTime != null">#{actualEndTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayOrder" parameterType="PlayOrder">
+        update play_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderSn != null and orderSn != ''">order_sn = #{orderSn},</if>
+            <if test="customerId != null">customer_id = #{customerId},</if>
+            <if test="talentId != null">talent_id = #{talentId},</if>
+            <if test="pricingType != null and pricingType != ''">pricing_type = #{pricingType},</if>
+            <if test="unitPrice != null">unit_price = #{unitPrice},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
+            <if test="orderStatus != null and orderStatus != ''">order_status = #{orderStatus},</if>
+            <if test="scheduledStartTime != null">scheduled_start_time = #{scheduledStartTime},</if>
+            <if test="actualStartTime != null">actual_start_time = #{actualStartTime},</if>
+            <if test="actualEndTime != null">actual_end_time = #{actualEndTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deletePlayOrderByOrderId" parameterType="Long">
+        delete from play_order where order_id = #{orderId}
+    </delete>
+
+    <delete id="deletePlayOrderByOrderIds" parameterType="String">
+        delete from play_order where order_id in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>
