@@ -2,6 +2,8 @@
 里面包括前端和后端，进行了ui美化
 大概长这样
 开罐即食
+首页页面更新了一点，后端bug也改了
+![Pixpin-4](https://github.com/zi-wei/ruoyi-/blob/main/IMG/11.png)
 ![PixPin_1](https://raw.githubusercontent.com/zi-wei/ruoyi-/main/IMG/PixPin_2025-11-11_11-21-30.png)
 ![PixPin_2](https://raw.githubusercontent.com/zi-wei/ruoyi-/main/IMG/PixPin_2025-11-11_11-21-10.png)
 ![PixPin_3](https://raw.githubusercontent.com/zi-wei/ruoyi-/main/IMG/PixPin_2025-11-11_11-20-26.png)
